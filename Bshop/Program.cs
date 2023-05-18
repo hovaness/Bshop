@@ -1,7 +1,11 @@
+using Bshop.Entity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ClientContext>();
+builder.Services.AddDbContext<MasterContext>();
 
 var app = builder.Build();
 

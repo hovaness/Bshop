@@ -8,8 +8,8 @@ namespace Bshop.Entity
         private string ConnectionPath =
             "Host=localhost;" +
             "Port=5432;" +
-            "Username=Hovani;" +
-            "Password=12345;" +
+            "Username=postgres;" +
+            "Password=turok2008;" +
             "Database=barbershopDB;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

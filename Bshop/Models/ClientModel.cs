@@ -10,10 +10,10 @@ namespace Bshop.Models
         [Column("name")]
         public string name { get; set; }
         [Column("number")]
-        public string number { get; set; }
+        public long number { get; set; }
         [Column("isRegular")]
         public bool isRegular { get; set; }
         [Column("visitings")]
-        public int visitings { get; set; }
+        public long visitings { get; set; }
     }
 }
