@@ -19,12 +19,53 @@ namespace Bshop.Controllers
             _context = context;
         }
 
+
+
         // GET: Master
         public async Task<IActionResult> Index()
         {
-              return _context.Master != null ? 
+            var masters = new List<MasterModel>();
+            if(_context.Master != null)
+                masters = _context.Master.ToList();
+            masters.Sort();
+            return View(masters);
+              /*return _context.Master != null ? 
                           View(await _context.Master.ToListAsync()) :
-                          Problem("Entity set 'MasterContext.Master'  is null.");
+                          Problem("Entity set 'MasterContext.Master'  is null.");*/
+        }
+
+        public async Task<IActionResult> Woman()
+        {
+            var masters = new List<MasterModel>();
+            if (_context.Master != null)
+                masters = _context.Master.ToList();
+            masters.Sort();
+            return  View(masters);
+            /*return _context.Master != null ? 
+                        View(await _context.Master.ToListAsync()) :
+                        Problem("Entity set 'MasterContext.Master'  is null.");*/
+        }
+        public async Task<IActionResult> Man()
+        {
+            var masters = new List<MasterModel>();
+            if (_context.Master != null)
+                masters = _context.Master.ToList();
+            masters.Sort();
+            return View(masters);
+            /*return _context.Master != null ? 
+                        View(await _context.Master.ToListAsync()) :
+                        Problem("Entity set 'MasterContext.Master'  is null.");*/
+        }
+        [HttpGet]
+        public async Task<IActionResult> Show(int id, int roomId)
+        {
+            var masters = _context.Master.Where(m=> m.roomid== roomId).ToList();
+            var entry = new HalfEntry()
+            {
+                masterModels = masters,
+                serviceId = id,
+            };
+            return View(entry);
         }
 
         // GET: Master/Details/5
@@ -150,7 +191,6 @@ namespace Bshop.Controllers
             {
                 _context.Master.Remove(masterModel);
             }
-            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

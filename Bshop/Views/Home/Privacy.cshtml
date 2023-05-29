@@ -1,6 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Aдминистрирование";
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center mb-5">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="col-12 row row-cols-4 mt-2 justify-content-between">
+        <div class="col">
+            <a class="text-black fs-5" asp-controller="Master" asp-action="Index">Мастера</a>
+        </div>
+        <div class="col">
+            <a class="text-black fs-5" asp-controller="Client" asp-action="Index">Клиенты</a>
+        </div>
+        <div class="col">
+            <a class="text-black fs-5" asp-controller="Service" asp-action="Index">Услуги</a>
+        </div>
+        <div class="col">
+            <a class="text-black fs-5" asp-controller="Entry" asp-action="Index">Записи</a>
+        </div>
+</div>

@@ -1,23 +1,20 @@
-﻿@model IEnumerable<Bshop.Models.MasterModel>
-@using Microsoft.AspNetCore.Components.Web
+﻿@model IEnumerable<Bshop.Models.ServiceModel>
 
 @{
     ViewData["Title"] = "Index";
-
 }
 
-
-<h1 class="mb-3">Список всех мастеров</h1>
+<h1>Услуги</h1>
 <div class="dropdown mb-3">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Фильтр по комнатам
+        Комнаты
     </button>
     <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li class="dropdown-item">
-            <a asp-action="Man" class="btn">Мужская</a>
+            <a asp-action="Woman" class="btn">Женская</a>
         </li>
         <li class="dropdown-item">
-            <a asp-action="Woman" class="btn">Женская</a>
+            <a asp-action="Man" class="btn">Мужская</a>
         </li>
     </ul>
 </div>
@@ -29,11 +26,12 @@
 <table class="table">
     <thead>
         <tr>
+            @*<th>ID</th>*@
             <th>
-                Имя
+                Услуга
             </th>
             <th>
-               Фамилия
+                Цена(в руб.)
             </th>
             <th>
                 Комната
@@ -44,18 +42,20 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            @*<td>@item.id</td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.secondname)
+                @Html.DisplayFor(modelItem => item.cost)
             </td>
             <td>
                 @item.GetRoom()
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Редактировать</a> |
+                <a asp-action="Edit" asp-route-id="@item.id">Изменить</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Удалить</a>
+                <a asp-action="Details" asp-route-id="@item.id">Подробности</a>
             </td>
         </tr>
 }

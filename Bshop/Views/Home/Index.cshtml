@@ -1,26 +1,48 @@
-﻿@{
+﻿@model IEnumerable<Bshop.Models.ServiceModel>
+@{
     ViewData["Title"] = "BShop";
 }
-
-<div class="col-12 text-center">
-    <img src="/imgs/Hero.png" class="img-fluid rounded" alt="Hero">
-    <div class="h2 m-lg-5 text-dark">Наши услуги и цены</div>
-    <div class="row row-col-2 lg-5">
-        <div class="m-2 col border rounded border-dark">
-            <div class="border-bottom  width-25 border-dark h4 m-2">Женский зал</div>
-            <div class="fs-5 text-dark">
-                <a class="text-body text-decoration-none" asp-controller="" asp-action="">- Прически -</a><br>
-                <a class="text-body text-decoration-none" asp-controller=""  asp-action="">- Макияж -</a><br>
-                <a class="text-body text-decoration-none" asp-controller=""  asp-action="">- Окрашивание волос -</a>
+@{
+    var womanList = new List<ServiceModel>();
+    var manList = new List<ServiceModel>();
+    foreach(var item in Model)
+    {
+        if (item.roomId == 2) womanList.Add(item);
+        else if (item.roomId == 1) manList.Add(item);
+    }
+    womanList.Sort();
+    manList.Sort();
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-end text-black fs-5 mb-4">
+        <a class="text-decoration-none text-black" asp-action="Register">Регистрация</a>
+    </div>
+    <div class="col-12 text-center">
+        <img src="/imgs/Hero.png" class="img-fluid rounded" alt="Hero">
+        <div class="h2 m-lg-5 text-dark">Наши услуги</div>
+        <div class="row row-col-2 lg-5">
+            <div class="m-2 col border rounded border-dark">
+                <div class="border-bottom  width-25 border-dark h4 m-2">Женский зал</div>
+                <div class="fs-5 text-dark">
+                    @foreach (var item in womanList)
+                    {
+                        <a asp-controller="Service" asp-action="Card" asp-route-id="@item.id" class="text-center text-decoration-none text-black">@item.name  -  @item.cost руб.</a>
+                        <br />
+                    }
+                </div>
             </div>
-        </div>
-        <div  class="m-2 col border rounded border-dark">
-            <div class="border-bottom border-dark h4 m-2">Мужской зал</div>
-            <div class="fs-5 text-dark">
-                <a class="text-body text-decoration-none" asp-controller="" asp-action="">- Прически -</a><br>
-                <a class="text-body text-decoration-none" asp-controller=""  asp-action="">- Усы и борода -</a><br>
-               <a class="text-body text-decoration-none" asp-controller=""  asp-action="">- Укладка -</a><br>
+            <div class="m-2 col border rounded border-dark">
+                <div class="border-bottom border-dark h4 m-2">Мужской зал</div>
+                <div class="fs-5 text-dark">
+                    @foreach (var item in manList)
+                    {
+                        <a asp-controller="Service" asp-action="Card" asp-route-id="@item.id" class="text-center text-decoration-none text-black">@item.name  -  @item.cost руб.</a>
+                        <br />
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+}

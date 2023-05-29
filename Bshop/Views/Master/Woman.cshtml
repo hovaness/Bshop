@@ -3,11 +3,14 @@
 
 @{
     ViewData["Title"] = "Index";
-
+    var newList = new List<MasterModel>();
+    foreach(var e in Model)
+    {
+        if (e.roomid == 2) newList.Add(e);
+    }
 }
 
-
-<h1 class="mb-3">Список всех мастеров</h1>
+<h1 class="mb-3">Список женских мастеров</h1>
 <div class="dropdown mb-3">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         Фильтр по комнатам
@@ -17,10 +20,12 @@
             <a asp-action="Man" class="btn">Мужская</a>
         </li>
         <li class="dropdown-item">
-            <a asp-action="Woman" class="btn">Женская</a>
+            <a asp-action="Index" class="btn">Все</a>
         </li>
     </ul>
 </div>
+
+
 
 
 <p>
@@ -29,11 +34,12 @@
 <table class="table">
     <thead>
         <tr>
+
             <th>
                 Имя
             </th>
             <th>
-               Фамилия
+                Фамилия
             </th>
             <th>
                 Комната
@@ -42,22 +48,23 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.secondname)
-            </td>
-            <td>
-                @item.GetRoom()
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Редактировать</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in newList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.secondname)
+                </td>
+                <td>
+                    @item.GetRoom()
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Редактировать</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

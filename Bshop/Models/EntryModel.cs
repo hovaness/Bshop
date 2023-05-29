@@ -14,6 +14,16 @@ namespace Bshop.Models
         [Column("serviceid")]
         public int serviceid { get; set; }
         [Column("time")]
-        public DateTime time { get; set; } 
+        public string time { get; set; }
+    }
+    public class HalfEntry
+    {
+        public List<MasterModel> masterModels { get; set; }
+        public int serviceId { get; set; } 
+    }
+    public class NewEntry
+    {
+        public List<MasterModel> masterModels { get; set; }
+        public EntryModel entryModel { get; set; }
     }
 }

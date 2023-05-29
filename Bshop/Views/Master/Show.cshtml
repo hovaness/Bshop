@@ -1,0 +1,18 @@
+﻿@model HalfEntry
+@{
+    ViewData["Title"] = "Masters";
+}
+<a class="text-decoration-none text-dark" asp-controller="Home" asp-action="Index">Вернуться</a>
+<h1 class="text-center mb-5">Наши мастера</h1>
+
+<div class="col-12">
+@foreach(var item in Model.masterModels){
+    <div class="row mb-5 d-flex">
+        <div class="col text-center border rounded border-dark">
+            <p class="fs-3">@item.name</p>
+            <p class="fs-3">@item.secondname</p>
+        </div>
+        <a asp-controller="Entry" asp-action="Add" asp-route-masterId ="@item.id" asp-route-serviceId="@Model.serviceId" class="btn btn-dark">Выбрать</a>
+    </div>
+}
+</div>

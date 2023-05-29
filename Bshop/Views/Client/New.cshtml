@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Bshop.Models.ClientModel>
+
+@{
+    ViewData["Title"] = "Index";
+    var newList = new List<ClientModel>();
+    foreach(var e in Model)
+    {
+        if (e.IsRegular() == "Новый") newList.Add(e);
+    }
+    newList.Sort();
+}
+
+<h1>Новые пользователи</h1>
+<div class="dropdown mb-3">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Фильтр клиентов
+    </button>
+    <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class="dropdown-item">
+            <a asp-action="Index" class="btn">Все</a>
+        </li>
+        <li class="dropdown-item">
+            <a asp-action="Old" class="btn">Постоянный</a>
+        </li>
+    </ul>
+</div>
+
+<p>
+    <a asp-action="Create">Создать</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Имя
+            </th>
+            <th>
+                Номер телефона
+            </th>
+            <th>
+                Постоянный клиент
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in newList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.number)
+                </td>
+                <td>
+                    @item.IsRegular()
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Редактировать</a> | |
+                    <a asp-action="Delete" asp-route-id="@item.id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

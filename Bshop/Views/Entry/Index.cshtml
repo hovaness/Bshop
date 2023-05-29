@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bshop.Models.ClientModel>
+﻿@model IEnumerable<Bshop.Models.EntryModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+                @Html.DisplayNameFor(model => model.clientid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.number)
+                @Html.DisplayNameFor(model => model.masterid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.isRegular)
+                @Html.DisplayNameFor(model => model.serviceid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.visitings)
+                @Html.DisplayNameFor(model => model.time)
             </th>
             <th></th>
         </tr>
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.clientid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.number)
+                @Html.DisplayFor(modelItem => item.masterid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isRegular)
+                @Html.DisplayFor(modelItem => item.serviceid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.visitings)
+                @Html.DisplayFor(modelItem => item.time)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

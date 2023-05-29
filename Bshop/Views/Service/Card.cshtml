@@ -1,0 +1,18 @@
+﻿@model ServiceModel
+@{
+    ViewData["Title"] = Model.name;
+}
+
+<a class="text-decoration-none text-dark" asp-controller="Home" asp-action="Index">Вернуться</a>
+<div class="container col-md-9">
+    <img class="img-fluid rounded  mb-5" src="~/imgs/barber.jpg" alt="Barber" />
+    <h2 class="text-center mb-4">@Model.name</h2>
+
+</div>
+<div class="border border-dark rounded-3 text-black text-center fs-4">
+     <p class="border-bottom border-dark pb-3 pt-3">Стоимость - @Model.cost руб.</p>
+      <p class="pt-0">Комната - @Model.GetRoom()</p>
+</div>
+<div class="text-center mt-3 mb-3">
+     <a asp-controller="Master" asp-action="Show" asp-route-id="@Model.id" asp-route-roomId="@Model.roomId" class="btn btn-dark">Выбрать мастера</a>
+</div>

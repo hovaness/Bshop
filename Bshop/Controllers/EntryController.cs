@@ -10,105 +10,97 @@ using Bshop.Models;
 
 namespace Bshop.Controllers
 {
-    public class ClientController : Controller
+    public class EntryController : Controller
     {
-        private readonly ClientContext _context;
+        private readonly EntryContext _context;
 
-        public ClientController(ClientContext context)
+        public EntryController(EntryContext context)
         {
             _context = context;
         }
 
-        // GET: Client
+        // GET: Entry
         public async Task<IActionResult> Index()
         {
-            var clients = new List<ClientModel>();
-            if (_context.Client != null)
-                clients = _context.Client.ToList();
-            clients.Sort();
-            return View(clients);
-        }
-        public async Task<IActionResult> New()
-        {
-            var clients = new List<ClientModel>();
-            if (_context.Client != null)
-                clients = _context.Client.ToList();
-            clients.Sort();
-            return View(clients);
-        }
-        public async Task<IActionResult> Old()
-        {
-            var clients = new List<ClientModel>();
-            if (_context.Client != null)
-                clients = _context.Client.ToList();
-            clients.Sort();
-            return View(clients);
+              return _context.Entrys != null ? 
+                          View(await _context.Entrys.ToListAsync()) :
+                          Problem("Entity set 'EntryContext.Entrys'  is null.");
         }
 
-        // GET: Client/Details/5
+        // GET: Entry/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Client == null)
+            if (id == null || _context.Entrys == null)
             {
                 return NotFound();
             }
 
-            var clientModel = await _context.Client
+            var entryModel = await _context.Entrys
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (clientModel == null)
+            if (entryModel == null)
             {
                 return NotFound();
             }
 
-            return View(clientModel);
+            return View(entryModel);
+        }
+        [HttpGet]
+        public IActionResult Add(int masterId,int serviceId)
+        {
+            var entry = new EntryModel
+            {
+                masterid = masterId,
+                serviceid = serviceId,
+            };
+            return View(entry);
         }
 
-        // GET: Client/Create
+        // GET: Entry/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Client/Create
+        // POST: Entry/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,number,isRegular,visitings,password")] ClientModel clientModel)
+        public async Task<IActionResult> Create([Bind("id,clientid,masterid,serviceid,time")] EntryModel entryModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clientModel);
+                _context.Add(entryModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientModel);
+            return View(entryModel);
         }
 
-        // GET: Client/Edit/5
+        // GET: Entry/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Client == null)
+            if (id == null || _context.Entrys == null)
             {
                 return NotFound();
             }
 
-            var clientModel = await _context.Client.FindAsync(id);
-            if (clientModel == null)
+            var entryModel = await _context.Entrys.FindAsync(id);
+            if (entryModel == null)
             {
                 return NotFound();
             }
-            return View(clientModel);
+            return View(entryModel);
         }
 
-        // POST: Client/Edit/5
+        // POST: Entry/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,number,isRegular,visitings,password")] ClientModel clientModel)
+        public async Task<IActionResult> Edit(int id, [Bind("id,clientid,masterid,serviceid,time")] EntryModel entryModel)
         {
-            if (id != clientModel.id)
+            if (id != entryModel.id)
             {
                 return NotFound();
             }
@@ -117,12 +109,12 @@ namespace Bshop.Controllers
             {
                 try
                 {
-                    _context.Update(clientModel);
+                    _context.Update(entryModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientModelExists(clientModel.id))
+                    if (!EntryModelExists(entryModel.id))
                     {
                         return NotFound();
                     }
@@ -133,49 +125,49 @@ namespace Bshop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientModel);
+            return View(entryModel);
         }
 
-        // GET: Client/Delete/5
+        // GET: Entry/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Client == null)
+            if (id == null || _context.Entrys == null)
             {
                 return NotFound();
             }
 
-            var clientModel = await _context.Client
+            var entryModel = await _context.Entrys
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (clientModel == null)
+            if (entryModel == null)
             {
                 return NotFound();
             }
 
-            return View(clientModel);
+            return View(entryModel);
         }
 
-        // POST: Client/Delete/5
+        // POST: Entry/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Client == null)
+            if (_context.Entrys == null)
             {
-                return Problem("Entity set 'ClientContext.Client'  is null.");
+                return Problem("Entity set 'EntryContext.Entrys'  is null.");
             }
-            var clientModel = await _context.Client.FindAsync(id);
-            if (clientModel != null)
+            var entryModel = await _context.Entrys.FindAsync(id);
+            if (entryModel != null)
             {
-                _context.Client.Remove(clientModel);
+                _context.Entrys.Remove(entryModel);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientModelExists(int id)
+        private bool EntryModelExists(int id)
         {
-          return (_context.Client?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.Entrys?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

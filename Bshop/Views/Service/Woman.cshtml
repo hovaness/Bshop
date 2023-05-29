@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Bshop.Models.ServiceModel>
+@using Microsoft.AspNetCore.Components.Web
+
+@{
+    ViewData["Title"] = "Index";
+    var newList = new List<ServiceModel>();
+    foreach(var e in Model)
+    {
+        if (e.roomId == 2) newList.Add(e);
+    }
+}
+
+<h1 class="mb-3">Список женских мастеров</h1>
+<div class="dropdown mb-3">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Комнаты
+    </button>
+    <ul class=" dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class="dropdown-item">
+            <a asp-action="Man" class="btn">Мужская</a>
+        </li>
+        <li class="dropdown-item">
+            <a asp-action="Index" class="btn">Все</a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+<p>
+    <a asp-action="Create">Добавить</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Услуга
+            </th>
+            <th>
+                Цена
+            </th>
+            <th>
+                Комната
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in newList)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @item.cost
+                </td>
+                <td>
+                    @item.GetRoom()
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Редактировать</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Удалить</a>
+                    <a asp-action="Details" asp-route-id="@item.id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

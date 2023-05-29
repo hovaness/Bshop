@@ -1,10 +1,11 @@
-﻿@model Bshop.Models.ClientModel
+﻿
+@model Bshop.Models.ClientModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Создание</h1>
 
 <h4>ClientModel</h4>
 <hr />
@@ -12,6 +13,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="id" class="control-label"></label>
+                <input asp-for="id" class="form-control" />
+                <span asp-validation-for="id" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="name" class="control-label"></label>
                 <input asp-for="name" class="form-control" />
@@ -22,16 +28,17 @@
                 <input asp-for="number" class="form-control" />
                 <span asp-validation-for="number" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isRegular" /> @Html.DisplayNameFor(model => model.isRegular)
-                </label>
-            </div>
             <div class="form-group">
                 <label asp-for="visitings" class="control-label"></label>
                 <input asp-for="visitings" class="form-control" />
                 <span asp-validation-for="visitings" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+  
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -40,7 +47,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Вернуться</a>
 </div>
 
 @section Scripts {

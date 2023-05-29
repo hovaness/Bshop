@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ClientContext>();
 builder.Services.AddDbContext<MasterContext>();
+builder.Services.AddDbContext<ServiceContext>();
+builder.Services.AddDbContext<EntryContext>();
 
 var app = builder.Build();
 

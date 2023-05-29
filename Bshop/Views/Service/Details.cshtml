@@ -1,15 +1,21 @@
-﻿@model Bshop.Models.MasterModel
+﻿@model Bshop.Models.ServiceModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Детали</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>MasterModel</h4>
+    <h4>EntryModel</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.name)
         </dt>
@@ -17,16 +23,10 @@
             @Html.DisplayFor(model => model.name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.secondname)
+            @Html.DisplayNameFor(model => model.cost)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.secondname)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.roomid)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.roomid)
+            @Html.DisplayFor(model => model.cost)
         </dd>
     </dl>
 </div>
