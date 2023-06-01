@@ -1,0 +1,14 @@
+﻿@model List<ServiceModel>
+@{
+}
+<div class="col-12">
+    @foreach (var item in Model)
+    {
+        <div class="row mb-5 d-flex">
+            <div class="col text-center border rounded border-dark">
+                <p class="fs-4">Услуга - @item.name</p>
+            </div>
+            <a  asp-action="Card" asp-route-id="@item.id" class="btn btn-dark">Выбрать</a>
+        </div>
+    }
+</div>

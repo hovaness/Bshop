@@ -4,23 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bshop.Models
 {
-    public class RegisterClientView
+    public class ProfileModel
     {
-        [Required(ErrorMessage = "Введите имя")]
-        [MinLength(2, ErrorMessage ="Слишком короткое имя")]
-        [MaxLength(20, ErrorMessage ="Слишком длинное имя")]
-        public string Name { get; set; }
-        [Required(ErrorMessage = "Введите имя")]
-        [MaxLength(11,ErrorMessage ="Номер не должен привышать 11 символов")]
+        public ClientModel me { get; set; }
+        public List<EntryModel> myEntrys { get; set; }
+    }
+    public class AuthView
+    {
+        [Required(ErrorMessage = "Введите номер телефона")]
+        [MaxLength(11, ErrorMessage = "Номер не должен привышать 11 символов")]
         public string Phone { get; set; }
-        [MinLength(6,ErrorMessage ="Пароль должен быть не меньше 6 символов")]
+        [MinLength(6, ErrorMessage = "Пароль должен быть не меньше 6 символов")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage ="Введите пароль")]
-        public string Password { get;set; }
         [Required(ErrorMessage = "Введите пароль")]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage ="Пароли не совпадают")]
-        public string PasswordConfirm { get; set; }
+        public string Password { get; set; }
     }
 
     public class ClientModel:IComparable<ClientModel>

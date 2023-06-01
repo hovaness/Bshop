@@ -2,6 +2,7 @@
 using Bshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Configuration;
 using System.Diagnostics;
 
 namespace Bshop.Controllers
@@ -10,11 +11,13 @@ namespace Bshop.Controllers
     {
         private readonly ServiceContext _contextService;
         private readonly ClientContext _contextClient;
+        private readonly EntryContext _contextEntry;
 
-        public HomeController(ServiceContext contextS, ClientContext contextC)
+        public HomeController(ServiceContext contextS, ClientContext contextC, EntryContext contextEntry)
         {
             _contextService = contextS;
             _contextClient = contextC;
+            _contextEntry = contextEntry;   
         }
 
         // GET: ServiceModels
@@ -42,6 +45,31 @@ namespace Bshop.Controllers
         [HttpGet]
         public IActionResult Authorize() => View();
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Authorize(AuthView client)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _contextClient.Client.First(m => m.number == client.Phone);
+                if (user == null) return RedirectToAction(nameof(Register), user);
+                else if (user.password != client.Password) return NotFound("пароль не верный");
+                return RedirectToAction(nameof(Profile), user);
+            }
+            return View(client);
+        }
+
+        [HttpGet]
+        public IActionResult Profile(ClientModel user)
+        {
+			var entrys = _contextEntry.Entrys.Where(m => user.id == m.clientid).ToList();
+            var profile = new ProfileModel()
+            {
+                me = user,
+                myEntrys = entrys,
+            };
+			return View(profile);
+        }
 
         [HttpGet]
         public IActionResult Register() => View();

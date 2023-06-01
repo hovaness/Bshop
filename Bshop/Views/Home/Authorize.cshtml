@@ -1,4 +1,4 @@
-﻿@model Bshop.Models.ClientModel
+﻿@model Bshop.Models.AuthView
 @{
     ViewData["Title"] = "Авторизация";
 }
@@ -9,13 +9,14 @@
         <form asp-action="Authorize">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="number" poster="Имя" class="control-label">Номер телефона</label>
-                <input asp-for="number" class="form-control" />
-                <span asp-validation-for="number" class="text-danger"></span>
+                <label asp-for="Phone" poster="Имя" class="control-label">Номер телефона</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="password" class="control-label">Введите пароль</label>
-                <input asp-for="password" class="form-control" />
+                <label asp-for="Password" class="control-label">Введите пароль</label>
+                <input asp-for="Password" class="form-control" />
+                  <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group mt-2 text-center mb-2 mt-2">
                 <input type="submit" value="Войти" class="btn btn-primary text-center" />

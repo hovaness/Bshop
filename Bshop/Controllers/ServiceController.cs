@@ -56,6 +56,15 @@ namespace Bshop.Controllers
             if (service == null) return NotFound();
             return View(service);
         }
+        [HttpGet]
+        public async Task<IActionResult> Show()
+        {
+			var list = _context.Service.ToList();
+			list.Sort();
+			return _context.Service != null ?
+						  View(list) :
+						  Problem("Entity set 'ServiceContext.Service'  is null.");
+		}
         // GET: Service/Details/5
         public async Task<IActionResult> Details(int? id)
         {

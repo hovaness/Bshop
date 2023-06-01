@@ -18,13 +18,15 @@ namespace Bshop.Models
         [Column("time", TypeName ="timestamp without time zone")]
 
         public DateTime time { get; set; }
+        
+        public string DateToString() { return this.time.ToString(); }
 
-
-
-        public int getClientFromNumber(string number)
+        public int getCostFromNumber(string number)
         {
             var client = new ClientContext().Client.FirstOrDefault(client => client.number == number);
-            return client.id;
+            int cost = getServiceCost(id);
+            if (client.isRegular) return (int)Math.Round(cost * 0.9);
+            else return cost;
         }
 		public string getMasterName(int id)
 		{
@@ -39,6 +41,11 @@ namespace Bshop.Models
 			var service = new ServiceContext().Service.FirstOrDefault(m => m.id == id);
 			res = service.name;
 			return res;
+		}
+        public int getServiceCost(int id)
+        {
+			var service = new ServiceContext().Service.FirstOrDefault(m => m.id == id);
+            return service.cost;
 		}
 	}
 

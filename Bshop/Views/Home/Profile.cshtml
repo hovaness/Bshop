@@ -1,0 +1,36 @@
+﻿@model ProfileModel
+@{
+	ViewData["Title"] = "Profile";
+	bool flag = Model.me.isRegular;
+}
+
+<div class="col-10 row">
+	<h1 class="text-center">Мой профиль</h1>
+	<h3 class="border-bottom pb-2">Пользователь</h3>
+	<div class="fs-4">
+		<p>@Model.me.name</p>
+		<p>@Model.me.number</p>
+	</div>
+	<h3>Заказы</h3>
+	<div class="row row-col-3" >
+	@foreach(var item in Model.myEntrys)
+	{
+		<div class="card" style="width: 18rem;">
+			<div class="card-header">
+				@item.getServiceName(item.serviceid)
+			 </div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					@item.getMasterName(item.masterid)
+				</li>
+				<li class="list-group-item">
+					@item.getCostFromNumber(Model.me.number)
+				</li>
+				<li class="list-group-item">
+					@item.DateToString()
+				</li>
+			</ul>
+		</div>
+	}
+	</div>
+</div>
