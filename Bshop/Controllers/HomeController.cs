@@ -18,7 +18,7 @@ namespace Bshop.Controllers
         }
 
         // GET: ServiceModels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ClientModel client)
         {
             return _contextService.Service != null ?
                         View(await _contextService.Service.ToListAsync()) :
@@ -42,14 +42,6 @@ namespace Bshop.Controllers
         [HttpGet]
         public IActionResult Authorize() => View();
 
-        /*[HttpPost]
-        public async Task<IActionResult> Authorize(ClientModel client)
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-        }*/
 
         [HttpGet]
         public IActionResult Register() => View();
@@ -60,21 +52,12 @@ namespace Bshop.Controllers
         {
             if(ModelState.IsValid)
             {
+                client.visitings = 0;
                 _contextClient.Add(client);
                 await _contextClient.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
         }
-       /* public async Task<IActionResult> Create([Bind("id,name,number,isRegular,visitings,password")] ClientModel clientModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(clientModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(clientModel);
-        }*/
     }
 }

@@ -13,10 +13,16 @@ namespace Bshop.Controllers
     public class EntryController : Controller
     {
         private readonly EntryContext _context;
+        private readonly MasterContext masterContext;
+        private readonly ServiceContext serviceContext;
+        private readonly ClientContext clientContext;
 
-        public EntryController(EntryContext context)
+        public EntryController(EntryContext context, MasterContext masterContext, ServiceContext serviceContext, ClientContext clientContext)
         {
             _context = context;
+            this.masterContext = masterContext;
+            this.serviceContext = serviceContext;
+            this.clientContext = clientContext;
         }
 
         // GET: Entry
@@ -45,17 +51,40 @@ namespace Bshop.Controllers
             return View(entryModel);
         }
         [HttpGet]
-        public IActionResult Add(int masterId,int serviceId)
+        public IActionResult ToRegister() => View();
+
+        [HttpGet]
+        public IActionResult Add(int serviceId, int masterId)
         {
-            var entry = new EntryModel
+            var entry = new HalfEntry
             {
-                masterid = masterId,
                 serviceid = serviceId,
+                masterid = masterId,
             };
             return View(entry);
         }
+        [HttpPost]
+        public IActionResult Add(HalfEntry halfEntry)
+        {
 
-        // GET: Entry/Create
+            var client = clientContext.Client.FirstOrDefault(client => client.number == halfEntry.phone);
+            if (client == null) return RedirectToAction(nameof(ToRegister));
+            var newEntry = new EntryModel()
+            {
+                clientid = client.id,
+                masterid = halfEntry.masterid,
+                serviceid = halfEntry.serviceid,
+                time = halfEntry.time,
+            };
+            _context.Entrys.Add(newEntry);
+            _context.SaveChanges();
+            client.visitings += 1;
+            clientContext.Update(client);
+            clientContext.SaveChanges();
+            return RedirectToAction(nameof(Info), newEntry);
+        }
+
+        public IActionResult Info(EntryModel newEntry) => View();
         public IActionResult Create()
         {
             return View();

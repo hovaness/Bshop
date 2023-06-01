@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Bshop.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bshop.Models
 {
@@ -13,17 +15,36 @@ namespace Bshop.Models
         public int masterid { get; set; }
         [Column("serviceid")]
         public int serviceid { get; set; }
-        [Column("time")]
-        public string time { get; set; }
-    }
-    public class HalfEntry
+        [Column("time", TypeName ="timestamp without time zone")]
+
+        public DateTime time { get; set; }
+
+
+
+        public int getClientFromNumber(string number)
+        {
+            var client = new ClientContext().Client.FirstOrDefault(client => client.number == number);
+            return client.id;
+        }
+		public string getMasterName(int id)
+		{
+			string res;
+			var master = new MasterContext().Master.FirstOrDefault(master => master.id == id);
+			res = master.name + " " + master.secondname;
+			return res;
+		}
+		public string getServiceName(int id)
+		{
+			string res;
+			var service = new ServiceContext().Service.FirstOrDefault(m => m.id == id);
+			res = service.name;
+			return res;
+		}
+	}
+
+    public class HalfEntry: EntryModel
     {
-        public List<MasterModel> masterModels { get; set; }
-        public int serviceId { get; set; } 
-    }
-    public class NewEntry
-    {
-        public List<MasterModel> masterModels { get; set; }
-        public EntryModel entryModel { get; set; }
+        public List<MasterModel> masters { get; set; }
+        public string phone { get; set; }
     }
 }

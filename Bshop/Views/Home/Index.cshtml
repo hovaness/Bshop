@@ -13,10 +13,10 @@
     womanList.Sort();
     manList.Sort();
 }
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="text-end text-black fs-5 mb-4">
-        <a class="text-decoration-none text-black" asp-action="Register">Регистрация</a>
+
+    <div class="text-black fs-5 mb-4 d-flex justify-content-between">
+        <a class="text-decoration-none text-black " asp-action="">Мои записи</a>
+        <a class="text-decoration-none text-black " asp-action="Register">Регистрация</a>
     </div>
     <div class="col-12 text-center">
         <img src="/imgs/Hero.png" class="img-fluid rounded" alt="Hero">
@@ -45,4 +45,4 @@
         </div>
     </div>
 
-}
+

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Редактирование</h1>
 
 <h4>EntryModel</h4>
 <hr />
@@ -14,34 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="clientid" class="control-label"></label>
+                <label asp-for="clientid" class="control-label">Id клиента</label>
                 <input asp-for="clientid" class="form-control" />
                 <span asp-validation-for="clientid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="masterid" class="control-label"></label>
+                <label asp-for="masterid" class="control-label">Id мастера</label>
                 <input asp-for="masterid" class="form-control" />
                 <span asp-validation-for="masterid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="serviceid" class="control-label"></label>
+                <label asp-for="serviceid" class="control-label">Id услуги</label>
                 <input asp-for="serviceid" class="form-control" />
                 <span asp-validation-for="serviceid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="time" class="control-label"></label>
+                <label asp-for="time" class="control-label">Дата и время</label>
                 <input asp-for="time" class="form-control" />
                 <span asp-validation-for="time" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Вернуться</a>
 </div>
 
 @section Scripts {

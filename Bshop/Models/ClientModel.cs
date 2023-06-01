@@ -42,6 +42,7 @@ namespace Bshop.Models
         public int? visitings { get; set; }
         [Column("password")]
         [DataType(DataType.Password)]
+        [MinLength(6)]
         [Required]
         public string password { get; set; }
         public string IsRegular() 
@@ -59,6 +60,7 @@ namespace Bshop.Models
             }
             return res;
         }
+
 
         public int CompareTo(ClientModel client)
         {

@@ -9,8 +9,8 @@ namespace Bshop.Entity
             "Host=localhost;" +
             "Port=5432;" +
             "Username=postgres;" +
-            "Password=12345;" +
-            "Database=huy;";
+            "Password=turok2008;" +
+            "Database=bshop;";
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

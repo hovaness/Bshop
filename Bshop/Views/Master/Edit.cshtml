@@ -14,22 +14,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="name" class="control-label"></label>
+                <label asp-for="name" class="control-label">Имя</label>
                 <input asp-for="name" class="form-control" />
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="secondname" class="control-label"></label>
+                <label asp-for="secondname" class="control-label">Фамилия</label>
                 <input asp-for="secondname" class="form-control" />
                 <span asp-validation-for="secondname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="roomid" class="control-label"></label>
+                <label asp-for="roomid" class="control-label">Номер комнаты</label>
                 <input asp-for="roomid" class="form-control" />
                 <span asp-validation-for="roomid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>

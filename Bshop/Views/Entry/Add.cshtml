@@ -1,4 +1,4 @@
-﻿@model EntryModel
+﻿@model HalfEntry
 @{
     ViewData["Title"] = "Запись";
 }
@@ -8,8 +8,37 @@
 <div class="row col-12 align-content-md-center justify-content-center align-self-center ">
     <div class="w-50  text-center mt-5 ">
         <h2 class="text-black border-bottom">Ваш заказ</h2>
-        <p>Номер услуги -@Model.serviceid</p>
-        <p>Номер мастера -@Model.masterid</p>
+        <p class="fs-4 text-dark">Услуга - @Model.getServiceName(Model.serviceid)</p>
+        <p class="fs-4 text-dark">Мастер - @Model.getMasterName(Model.masterid)</p>
     </div>
+    <h4 class="text-center">Чтобы подтвердить операцию введите дату и номер телефона</h4>
+    <form asp-action="Add">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+     
+            <input type="hidden" asp-for="masterid" value="@Model.masterid" class="form-control" />
+            <span asp-validation-for="masterid" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+
+            <input type="hidden" asp-for="serviceid" value="@Model.serviceid" class="form-control" />
+            <span asp-validation-for="serviceid" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="time" class="control-label">Время</label>
+            <input asp-for="time"  class="form-control" />
+            <span asp-validation-for="time" class="text-danger"></span>
+        </div>
+         <div class="form-group">
+            <label  asp-for="phone" class="control-label">Номер телефона</label>
+            <input placeholder="8999125560" asp-for="phone" class="form-control" />
+            <span asp-validation-for="phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+             <input type="submit" value="Отправить" class="btn btn-dark"/>
+        </div>
+    </form>
 </div>
+
+
 

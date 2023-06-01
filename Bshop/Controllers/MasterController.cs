@@ -62,8 +62,8 @@ namespace Bshop.Controllers
             var masters = _context.Master.Where(m=> m.roomid== roomId).ToList();
             var entry = new HalfEntry()
             {
-                masterModels = masters,
-                serviceId = id,
+                masters = masters,
+                serviceid = id,
             };
             return View(entry);
         }
