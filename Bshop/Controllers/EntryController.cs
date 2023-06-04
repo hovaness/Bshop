@@ -191,7 +191,7 @@ namespace Bshop.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Info));
         }
 
         private bool EntryModelExists(int id)
